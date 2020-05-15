@@ -55,38 +55,31 @@ class create_window_point_of_sale():
 
 		self.label2_frame_left=Label(self.frame_left , text="Producto:" , font=(5))
 		self.label2_frame_left.place(x=20 , y=100)
-		self.Entry1_frame_lef=Entry()
-		self.Entry1_frame_lef.place(x=100 ,y=130)
-		self.Button1_frame_lef=Button(self.frame_left , text="Buscar" , width="15" )
+		self.Entry1_frame_lef=Text(self.frame_left , width=18 , height=3)
+		self.Entry1_frame_lef.place(x=100 ,y=135)
+		self.Button1_frame_lef=Button(self.frame_left , text="Buscar" , width="18" )
 		self.Button1_frame_lef.place(x=100 , y=100)
 
 
 
 		self.label3_frame_left=Label(self.frame_left , text="Cantidad:" , font=(5))
-		self.label3_frame_left.place(x=20 , y=180)
+		self.label3_frame_left.place(x=20 , y=200)
 		self.Entry2_frame_lef=Entry()
-		self.Entry2_frame_lef.place(x=100 , y=180)
+		self.Entry2_frame_lef.place(x=100 , y=200)
 
 		self.label3_frame_left=Label(self.frame_left , text="Precio:" , font=(5))
-		self.label3_frame_left.place(x=20 , y=230)
+		self.label3_frame_left.place(x=20 , y=250)
 		self.Entry2_frame_lef=Entry()
-		self.Entry2_frame_lef.place(x=100 , y=230)
-
+		self.Entry2_frame_lef.place(x=100 , y=250)
 
 
 
 
 		self.Button2_frame_lef=Button(self.frame_left , text="guardar" , width="15" )
-		self.Button2_frame_lef.place(x=20 , y=280)
+		self.Button2_frame_lef.place(x=20 , y=330)
 
 		self.Button3_frame_lef=Button(self.frame_left , text="Limpiar Campos" , width="15" )
-		self.Button3_frame_lef.place(x=150 , y=280)
-
-
-
-
-
-
+		self.Button3_frame_lef.place(x=150 , y=330)
 
 
 
@@ -97,12 +90,33 @@ class create_window_point_of_sale():
 
 
 
+		#________________ area de botones y entris del frame arriba a la izquierda__________
 
 		self.frame_top=Frame()
 		self.frame_top.pack( side="left" ,anchor="n")
-		self.frame_top.config(bg="blue")
+		#self.frame_top.config(bg="blue")
 		self.frame_top.config(relief="sunken")
 		self.frame_top.config(width="900" , height="100")
+
+
+
+
+		self.label4_frame_raight=Label(self.frame_top , text="Venta"  ,  font=(1000000000) , fg="blue")
+		self.label4_frame_raight.place(x=20 , y=20)
+
+
+		self.label5_frame_raight=Label(self.frame_top , text="Usuario:"  ,  font=(1000000000) , fg="blue")
+		self.label5_frame_raight.place(x=250 , y=20)
+		self.INTERMEDIO=Label(self.frame_top , text="Angelo Urbano"  ,  font=(1000000000))
+		self.INTERMEDIO.place(x=320 , y=20)
+
+
+		self.label6_frame_raight=Label(self.frame_top , text="Cedula:"  ,  font=(1000000000) , fg="blue")
+		self.label6_frame_raight.place(x=500 , y=20)
+		self.INTERMEDIO2=Label(self.frame_top , text="25850696"  ,  font=(1000000000) )
+		self.INTERMEDIO2.place(x=560 , y=20)
+
+
 
 
 
