@@ -8,9 +8,12 @@ from tkinter import ttk
 
 from tkinter import messagebox
 from connect_mysql  import *
+from BackendSpace import *
 
 class test_mysql(connect_to_mysql):	
-	"""de esta manera a travez de la herencia puedo acceder 
+	
+	"""de esta manera a travez de la herencia puedo acceder
+
 	a la clase que me esta gestionando la coneccion a la BBDD"""				
 
 	def __init__(self):
@@ -25,7 +28,7 @@ class test_mysql(connect_to_mysql):
 		self.my_conect.commit()
 
 
-test_mysql1=test_mysql()		
+#test_mysql1=test_mysql()		
 
 
 
@@ -43,13 +46,43 @@ class create_window_point_of_sale():
 		self.root.config(menu=self.menu)
 
 
+		#____________________var client__________
+
+		self.name=StringVar()
+		self.surname=StringVar()
+		self.cedula=IntVar()
+		self.fom_number=StringVar()
+		self.status=StringVar()
+
+		#____________________FINNN__________
+
+		#___________________var proveedor_________
+
+		self.name_proveedor=StringVar()
+		self.name_producto=StringVar()
+		self.fom_number2=IntVar()
+		self.email=StringVar()
+		
+
+
+		#____________________________________
+
+
+		#_________________var_product________
+
+		self.name_product=StringVar()
+		self.existing_quantity=IntVar()
+
+		#__________________FIN_______________
+
+
 		self.option1=Menu(self.menu , tearoff=0)
-		self.option1.add_command(label="nuevo")
-		self.option1.add_command(label="nuevo")
+		self.option1.add_command(label="Add Cliente" , command=self.new_window_client_add)
+		self.option1.add_command(label="Add Producto" , command=self.new_window_product_add)
 
 		self.option2=Menu(self.menu , tearoff=0)
-		self.option2.add_command(label="nuevo")
-		self.option2.add_command(label="nuevo")
+		self.option2.add_command(label="Add Caracteristica")
+		self.option2.add_command(label="Add Proveedor" , command=self.new_window_proveedor_add)
 
 		self.option3=Menu(self.menu , tearoff=0)
 		self.option3.add_command(label="nuevo")
@@ -230,16 +263,216 @@ class create_window_point_of_sale():
 
 		#_______________________lista de productos__________________
 
-
-		
-
-
-
-		
-
 		self.root.mainloop()
 
+		"""print(self.name.get(),
+		self.surname.get(),
+		self.cedula.get(),
+		self.fom_number.get(),
+		self.status.get())"""
+
+
+	def new_window_client_add(self):
+
+		self.root_client=Toplevel(self.root)
+		
+
+
+		self.label_client1=Label(self.root_client, text="Nombre:")
+		self.label_client1.grid()
+		self.entry_client1=Entry(self.root_client , textvariable=self.name)
+		self.entry_client1.grid()
+
+		self.label_client2=Label(self.root_client, text="Apellido:" )
+		self.label_client2.grid()
+		self.entry_client2=Entry(self.root_client ,  textvariable=self.surname)
+		self.entry_client2.grid()
+
+		self.label_client3=Label(self.root_client, text="Cedula:" )
+		self.label_client3.grid()
+		self.entry_client3=Entry(self.root_client ,  textvariable=self.cedula)
+		self.entry_client3.grid()
+
+
+		self.label_client4=Label(self.root_client, text="Telefono:" )
+		self.label_client4.grid()
+		self.entry_client4=Entry(self.root_client , textvariable=self.fom_number)
+		self.entry_client4.grid()
+
+		self.label_client5=Label(self.root_client, text="Estado:" )
+		self.label_client5.grid()
+		self.entry_client5=Entry(self.root_client , textvariable=self.status)
+		self.entry_client5.grid()
+
+
+		self.button_cliente1=Button(self.root_client, text="add" , command=self.test)
+		self.button_cliente1.grid()
+
+		self.button_cliente2=Button(self.root_client, text="Limpiar Campos" , command=self.clint)
+		self.button_cliente2.grid()
+
+		self.button_cliente2=Button(self.root_client, text="Lista" , command=self.update_list)
+		self.button_cliente2.grid()
+
+		
+
+		#_______________________lista de productos__________________
+
+		self.lista2=ttk.Treeview(self.root_client)
+
+		self.lista2["columns"]=("uno" , "dos" , "tres" , "cuatro" ,"cinco" )
+		self.lista2.column("#0" , width=30 , minwidth=70 )
+		self.lista2.column("uno" , width=170 , minwidth=70 )
+		self.lista2.column("dos" , width=150 , minwidth=150 )
+		self.lista2.column("tres" , width=185, minwidth=100 )
+		self.lista2.column("cuatro" , width=80 , minwidth=100)
+		self.lista2.column("cinco" , width=80 , minwidth=100 )
+		
+		self.lista2.heading("#0" , text="codigo"   )
+		self.lista2.heading("uno" , text="Nombre"   )
+		self.lista2.heading("dos" , text="Apellido")
+		self.lista2.heading("tres" , text="Cedula")
+		self.lista2.heading("cuatro" , text="Telefono")
+		self.lista2.heading("cinco" , text="Status")
+		
+		
+		self.lista2.place(x=150 ,y=50)
+
+
+		#_______________________lista de productos__________________
 
 
 
-new=create_window_point_of_sale()		
+		
+
+		self.root_client.mainloop()
+
+
+	def new_window_product_add(self):
+
+		self.root_product=Toplevel(self.root)
+
+
+		self.label_product1=Label(self.root_product, text="Nombre Producto:")
+		self.label_product1.grid()
+		self.entry_product1=Entry(self.root_product)
+		self.entry_product1.grid()
+
+		self.label_product2=Label(self.root_product, text="Cantidad Existente:")
+		self.label_product2.grid()
+		self.entry_product2=Entry(self.root_product)
+		self.entry_product2.grid()
+
+		self.label_product3=Label(self.root_product, text="Caracteristicas:")
+		self.label_product3.grid()
+		self.entry_product3=Entry(self.root_product)
+		self.entry_product3.grid()
+
+
+		self.label_product4=Label(self.root_product, text="Precio Unitario:")
+		self.label_product4.grid()
+		self.entry_product4=Entry(self.root_product)
+		self.entry_product4.grid()
+
+		self.label_product5=Label(self.root_product, text="Proveedor:")
+		self.label_product5.grid()
+		self.entry_product5=Entry(self.root_product)
+		self.entry_product5.grid()
+
+
+		self.button_product1=Button(self.root_product, text="test")
+		self.button_product1.grid()
+
+		self.button_product2=Button(self.root_product, text="test")
+		self.button_product2.grid()
+
+		self.button_product3=Button(self.root_product, text="test")
+		self.button_product3.grid()
+
+
+
+		self.lista=ttk.Treeview(self.root_product)
+
+		self.lista["columns"]=("uno" , "dos" , "tres"  )
+		self.lista.column("#0" , width=30 , minwidth=70 )
+		self.lista.column("uno" , width=270 , minwidth=270 )
+		self.lista.column("dos" , width=150 , minwidth=150 )
+		self.lista.column("tres" , width=185, minwidth=100 )
+		
+		self.lista.heading("#0" , text="codigo"   )
+		self.lista.heading("uno" , text="Pedido"   )
+		self.lista.heading("dos" , text="Cantidad")
+		self.lista.heading("tres" , text="Precio")
+		
+		self.lista.place(x=150 ,y=50)
+
+
+		
+
+		self.root_product.mainloop()
+
+
+	def new_window_proveedor_add(self):
+		
+		
+
+
+		self.root_caracteristica= Toplevel(self.root)
+
+		self.label_name_proveedor1=Label(self.root_caracteristica , text="Nombre:")
+		self.label_name_proveedor1.grid()
+		self.entry_name_proveedor=Entry(self.root_caracteristica , textvariable=self.name_proveedor)
+		self.entry_name_proveedor.grid()
+
+		self.label_produc_proveedor2=Label(self.root_caracteristica , text="Nombre Producto:")
+		self.label_produc_proveedor2.grid()
+		self.label_produc_proveedor2=Entry(self.root_caracteristica , textvariable=self.name_producto)
+		self.label_produc_proveedor2.grid()	
+
+		self.label_number_proveedor3=Label(self.root_caracteristica , text="Numero de Telefono:")
+		self.label_number_proveedor3.grid()
+		self.label_number_proveedor3=Entry(self.root_caracteristica , textvariable=self.fom_number2)
+		self.label_number_proveedor3.grid()	
+
+		self.label_email_proveedor4=Label(self.root_caracteristica , text="Email:")
+		self.label_email_proveedor4.grid()
+		self.label_email_proveedor4=Entry(self.root_caracteristica , textvariable=self.email)
+		self.label_email_proveedor4.grid()
+
+		self.button_proveedor_test=Button(self.root_caracteristica, text="Guardar", command=self.add_proveedor)
+		self.button_proveedor_test.grid()
+		self.button_proveedor_test2=Button(self.root_caracteristica, text="Limpiar campos" , command=self.proveedor_clint)
+		self.button_proveedor_test2.grid()
+
+
+
+
+		self.lista=ttk.Treeview(self.root_caracteristica)
+
+		self.lista["columns"]=("uno" , "dos" , "tres"  )
+		self.lista.column("#0" , width=30 , minwidth=70 )
+		self.lista.column("uno" , width=270 , minwidth=270 )
+		self.lista.column("dos" , width=150 , minwidth=150 )
+		self.lista.column("tres" , width=185, minwidth=100 )
+		
+		self.lista.heading("#0" , text="codigo"   )
+		self.lista.heading("uno" , text="Pedido"   )
+		self.lista.heading("dos" , text="Cantidad")
+		self.lista.heading("tres" , text="Precio")
+		
+		self.lista.place(x=150 ,y=50)	
+
+
+
+
+
+		self.root_caracteristica.mainloop()	
+
+		
+
+	
+
+
+
+
+		
